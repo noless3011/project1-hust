@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from '@/app/redux/store';
 import ProductCardDropdown from '../../components/landing/ProductCardDropdown';
 import Product from '@/app/types/Product';
+import Image from 'next/image';
 
 interface ProductCardProps {
     product: Product;
@@ -31,10 +32,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 }}>
                 <Link href={url} className="block overflow-hidden aspect-square flex-grow-[3]">
                     <div className="relative aspect-auto rounded-t-lg w-full h-full object-cover">
-                        <img
+                        <Image
                             src={image}
                             alt={name}
-                            className="w-full h-full object-cover rounded-t-lg "
+                            layout='fill'
+                            objectFit='fit'
+                            className="rounded-t-lg "
                         />
                     </div>
                 </Link>

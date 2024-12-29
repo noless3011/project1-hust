@@ -1,5 +1,6 @@
 // components/ProductRow.tsx
 import React from 'react';
+import Image from 'next/image';
 import Product, { productTypeColorMap } from '@/app/types/Product';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
@@ -65,11 +66,14 @@ const ProductRow: React.FC<ProductRowProps> = ({ product }) => {
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
-                    <div className="h-10 w-10 mr-2">
+                    <div className="relative h-10 w-10 mr-2">
                         {product.images[0] && (
-                            <img
+                            <Image
                                 className="h-full w-full rounded object-cover"
+                                crossOrigin='anonymous'
                                 src={product.images[0]}
+                                layout="fill"
+                                objectFit='contain'
                                 alt={product.name}
                             />
                         )}

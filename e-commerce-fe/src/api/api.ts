@@ -659,6 +659,31 @@ export interface UpdateUserDto {
 /**
  * 
  * @export
+ * @interface UploadFileResponse
+ */
+export interface UploadFileResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadFileResponse
+     */
+    'fileName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadFileResponse
+     */
+    'message': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UploadFileResponse
+     */
+    'code': number;
+}
+/**
+ * 
+ * @export
  * @interface UserResponseDto
  */
 export interface UserResponseDto {
@@ -1310,7 +1335,7 @@ export const FileUploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async fileUploadControllerUploadSingle(file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async fileUploadControllerUploadSingle(file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadFileResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.fileUploadControllerUploadSingle(file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FileUploadApi.fileUploadControllerUploadSingle']?.[localVarOperationServerIndex]?.url;
@@ -1341,7 +1366,7 @@ export const FileUploadApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fileUploadControllerUploadSingle(file?: File, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        fileUploadControllerUploadSingle(file?: File, options?: RawAxiosRequestConfig): AxiosPromise<UploadFileResponse> {
             return localVarFp.fileUploadControllerUploadSingle(file, options).then((request) => request(axios, basePath));
         },
     };

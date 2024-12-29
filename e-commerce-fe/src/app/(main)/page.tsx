@@ -7,6 +7,8 @@ import ProductCard from "./components/landing/ProductCard";
 import ProductGridList from "./components/landing/ProductGridList";
 import ProductHorizontalList from "./components/landing/ProductHorizontalList";
 import Product, { mapProductResponseToProduct, ProductType } from "../types/Product";
+import LoadingAnimation from "./components/landing/LoadingAnimationCards";
+import LoadingCard from "./components/landing/LoadingCard";
 
 export default function Page() {
     const [hotSalesProducts, setHotSalesProducts] = useState<Product[]>([]);
@@ -126,68 +128,74 @@ export default function Page() {
             </CategoryGrid>
 
             <ProductHorizontalList title="Hot Sales">
-                {hotSalesProducts.map((product) => (
+
+                {hotSalesProducts.length === 0 ? (<LoadingAnimation></LoadingAnimation>) : (hotSalesProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         product={product}
                         cardW={250} // Adjust as needed
                         cardH={350} // Adjust as needed
                     />
-                ))}
+                )))}
             </ProductHorizontalList>
 
             <ProductHorizontalList title="New Arrivals">
-                {newArrivalsProducts.map((product) => (
+                {newArrivalsProducts.length === 0 ? (<LoadingAnimation></LoadingAnimation>) : (newArrivalsProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         product={product}
                         cardW={250} // Adjust as needed
                         cardH={350} // Adjust as needed
                     />
-                ))}
+                )))}
             </ProductHorizontalList>
             <ProductHorizontalList title="Recent Searched">
-                {recentSearchedProducts.map((product) => (
+                {recentSearchedProducts.length === 0 ? (<LoadingAnimation></LoadingAnimation>) : (recentSearchedProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         product={product}
                         cardW={250} // Adjust as needed
                         cardH={350} // Adjust as needed
                     />
-                ))}
+                )))}
             </ProductHorizontalList>
             <ProductHorizontalList title="Your most viewed category">
-                {suggestionProducts.map((product) => (
+                {suggestionProducts.length === 0 ? (<LoadingAnimation></LoadingAnimation>) : (suggestionProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         product={product}
                         cardW={250} // Adjust as needed
                         cardH={350} // Adjust as needed
                     />
-                ))}
+                )))}
             </ProductHorizontalList>
             <ProductHorizontalList title="Discovery">
-                {discoveryProducts.map((product) => (
+                {discoveryProducts.length === 0 ? (<LoadingAnimation></LoadingAnimation>) : (discoveryProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         product={product}
                         cardW={250} // Adjust as needed
                         cardH={350} // Adjust as needed
                     />
-                ))}
+                )))}
             </ProductHorizontalList>
             <div className="h-10 text-3xl font-bold mt-10">
                 All Products
             </div>
             <ProductGridList itemsPerPage={20}>
-                {paginatedProducts.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                        cardW={250} // Adjust as needed
-                        cardH={350} // Adjust as needed
-                    />
-                ))}
+                {paginatedProducts.length === 0 ?
+                    (Array.from({ length: 20 }).map((_, index) => (
+                        <LoadingCard key={index} />
+                    )))
+                    :
+                    (paginatedProducts.map((product) => (
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            cardW={250} // Adjust as needed
+                            cardH={350} // Adjust as needed
+                        />
+                    )))}
             </ProductGridList>
 
             <div className="h-96"></div>
